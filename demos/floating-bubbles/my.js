@@ -1,92 +1,42 @@
-window.addEventListener('load', function() {
-    // plugins
-    Matter.use(MatterWrap);
+// plugin
+Matter.use('matter-wrap');
 
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
+const COLORS = ['#c5f6fa', '#d0ebff', '#d3f9d8'];
+const MIN_BODY_RADIUS = 50;
+const MAX_BODY_RADIUS = 100;
+const FRICTION_AIR = 0.03;
+const SCROLL_VELOCITY = 0.025;
+const BODIES_PER_PIXEL = 0.00002;
 
-    let floatingBodies = [];
-    let lastScrollTop = document.documentElement.scrollTop;
-    let scrollTimeout = null;
-    let engineUpdateTimeout = null;
-    let resizeTimeout = null;
+const SCROLL_DELAY = 200;
+const RESIZE_DELAY = 400;
 
-    // matter.js has a built in random range function, but it is deterministic
-    function rand(min, max) {
-        return Math.random() * (max - min) + min;
-    }
+let engine;
+let render;
+let runner;
 
-    function wall(x, y, width, height) {
-        return Matter.Bodies.rectangle(x, y, width, height, {
-            isStatic: true,
-            render: {
-                fillStyle: '#868e96'
-            }
-        });
-    }
+let viewportWidth;
+let viewportHeight;
+let bodies;
+let lastScrollTop;
+let scrollTimeout;
+let resizeTimeout;
 
-    // creates a randomized floating body
-    function floatingBody() {
-        let x = rand(0, viewportWidth);
-        let y = rand(0, viewportHeight);
+function init() {
+    viewportWidth = document.documentElement.clientWidth;
+    viewportHeight = document.documentElement.clientHeight;
 
-        let color = ['#c5f6fa', '#d0ebff', '#d3f9d8'][floatingBodies.length % 3];
+    lastScrollTop = document.documentElement.scrollTop;
 
-        return Matter.Bodies.circle(x, y, rand(50, 100), {
-            frictionAir: 0.03,
-            render: {
-                fillStyle: color
-            },
-            plugin: {
-                wrap: {
-                    min: { x: 0, y: 0 },
-                    max: { x: viewportWidth, y: viewportHeight }
-                }
-            }
-        });
-    }
-
-    // throttle scrolling
-    function onScrollThrottled() {
-        if (!scrollTimeout) {
-            scrollTimeout = setTimeout(onScroll, 200);
-        }
-    }
-
-    // push bodies around depending on scroll
-    function onScroll() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = null;
-
-        let delta = (lastScrollTop - document.documentElement.scrollTop) / 40;
-        floatingBodies.forEach((body) => {
-            Matter.Body.setVelocity(body, {
-                x: body.velocity.x + delta * rand(-0.5, 0.5),
-                y: body.velocity.y + delta * rand(0.5, 1.5)
-            });
-        });
-
-        lastScrollTop = document.documentElement.scrollTop;
-    }
-
-    // throttle resize window
-    function onResizeThrottled() {
-        if (!resizeTimeout) {
-            resizeTimeout = setTimeout(onResize, 400);
-        }
-    }
-
-    // cheap fix if viewport changes, start over! (obviously demo purposes only)
-    function onResize() {
-        window.location.reload();
-    }
+    scrollTimeout = null;
+    resizeTimeout = null;
 
     // engine
-    let engine = Matter.Engine.create();
+    engine = Matter.Engine.create();
     engine.world.gravity.y = 0;
 
     // render
-    let render = Matter.Render.create({
+    render = Matter.Render.create({
         element: document.body,
         engine: engine,
         options: {
@@ -99,15 +49,81 @@ window.addEventListener('load', function() {
     Matter.Render.run(render);
 
     // runner
-    let runner = Matter.Runner.create();
+    runner = Matter.Runner.create();
     Matter.Runner.run(runner, engine);
 
-    // add a number of floating bodies appropriate for amount of screen space
-    let floatingBodiesCount = Math.round(viewportWidth * viewportHeight / 50000);
-    for (let i = 0; i <= floatingBodiesCount; i++) {
-        floatingBodies.push(floatingBody());
+    // bodies
+    bodies = [];
+    let totalBodies = Math.round(viewportWidth * viewportHeight * BODIES_PER_PIXEL);
+    for (let i = 0; i <= totalBodies; i++) {
+        bodies.push(createBody());
     }
-    Matter.World.add(engine.world, floatingBodies);
+    Matter.World.add(engine.world, bodies);
+}
+
+function shutdown() {
+    render.canvas.remove();
+    Matter.Engine.clear(engine);
+    Matter.Render.stop(render);
+    Matter.Runner.stop(runner);
+}
+
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function createBody() {
+    let x = rand(0, viewportWidth);
+    let y = rand(0, viewportHeight);
+    let radius = rand(MIN_BODY_RADIUS, MAX_BODY_RADIUS)
+    let color = COLORS[bodies.length % COLORS.length];
+
+    return Matter.Bodies.circle(x, y, radius, {
+        frictionAir: FRICTION_AIR,
+        render: { fillStyle: color },
+        plugin: {
+            wrap: {
+                min: { x: 0, y: 0 },
+                max: { x: viewportWidth, y: viewportHeight }
+            }
+        }
+    });
+}
+
+function onScrollThrottled() {
+    if (!scrollTimeout) {
+        scrollTimeout = setTimeout(onScroll, SCROLL_DELAY);
+    }
+}
+
+function onScroll() {
+    scrollTimeout = null;
+
+    let delta = (lastScrollTop - document.documentElement.scrollTop) * SCROLL_VELOCITY;
+
+    bodies.forEach((body) => {
+        Matter.Body.setVelocity(body, {
+            x: body.velocity.x + delta * rand(-0.5, 0.5),
+            y: body.velocity.y + delta * rand(0.5, 1.5)
+        });
+    });
+
+    lastScrollTop = document.documentElement.scrollTop;
+}
+
+function onResizeThrottled() {
+    if (!resizeTimeout) {
+        resizeTimeout = setTimeout(onResize, RESIZE_DELAY);
+    }
+}
+
+function onResize() {
+    shutdown();
+    init();
+}
+
+window.addEventListener('load', function() {
+    init();
 
     // wire events
     window.addEventListener('scroll', onScrollThrottled);
