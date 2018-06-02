@@ -155,7 +155,7 @@ let floatingBubbles = {
 		this.shutdown();
 		this.init();
 	}
-}
+};
 
 // wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
