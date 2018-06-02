@@ -1,0 +1,62 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 40px 20px;
+	color: #fff;
+	background-color: #000;
+	background: linear-gradient(to bottom right, #142621, #262133, #1c2933);
+	font: 1.25rem/1.5 'Roboto', sans-serif;
+}
+
+.wrapper {
+	padding: 20px;
+	border: 1px solid #000;
+	background-color: rgba(0, 0, 0, 0.75);
+	overflow: hidden;
+}
+
+h1, h2 {
+	margin: 0;
+	line-height: 1.25;
+}
+
+h1 {
+	padding-bottom: 2rem;
+	border-bottom: 6px dotted;
+	font-size: 3.5rem;
+	text-transform: uppercase;
+}
+
+h2 {
+	margin-top: 2rem;
+	font-size: 1.5rem;
+}
+
+canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#bg1 {
+	z-index: -1;
+	filter: blur(2px);
+}
+
+#bg2 {
+	z-index: -2;
+	filter: blur(10px);
+}
+
+@media screen and (min-width: 500px) {
+	h1 {
+		font-size: 5rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
+}
