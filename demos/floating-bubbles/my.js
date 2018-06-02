@@ -36,7 +36,7 @@ let floatingBubbles = {
 	// kicks things off
 	init(options) {
 		// override default options with incoming options
-		this.options = Object.assign(this.options, options);
+		this.options = Object.assign({}, this.options, options);
 
 		let viewportWidth = document.documentElement.clientWidth;
 		let viewportHeight = document.documentElement.clientHeight;
