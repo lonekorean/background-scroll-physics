@@ -4,14 +4,19 @@ Matter.use('matter-wrap');
 let floatingBubbles = {
 	// customizable options (passed into init function)
     options: {
-        canvasSelector: '',
-        colors: ['#c5f6fa', '#d0ebff', '#d3f9d8'],
-        minBodyRadius: 50,
-        maxBodyRadius: 100,
-        airFriction: 0.03,
-        scrollVelocity: 0.025,
-        bodiesPerPixel: 0.00002
-    },
+		canvasSelector: '',				// to find <canvas> in DOM to draw on
+		radiusRange: [50, 100],			// random range of body radii
+		xVarianceRange: [-0.5, 0.5],	// random range of x velocity scaling on bodies
+		yVarianceRange: [0.5, 1.5],		// random range of y velocity scaling on bodies
+		airFriction: 0.03,				// air friction of bodies
+		opacity: 1,						// opacity of bodies
+		collisions: true,				// do bodies collide or pass through
+		scrollVelocity: 0.025,			// scaling of scroll delta to velocity applied to bodies
+		pixelsPerBody: 50000,			// viewport pixels required for each body added
+
+		// colors to cycle through to fill bodies
+		colors: ['#c5f6fa', '#d0ebff', '#d3f9d8']
+	},
 
 	// throttling intervals (in ms)
 	scrollDelay: 100,
@@ -63,7 +68,7 @@ let floatingBubbles = {
 	
 		// bodies
 		this.bodies = [];
-		let totalBodies = Math.round(viewportWidth * viewportHeight * this.options.bodiesPerPixel);
+		let totalBodies = Math.round(viewportWidth * viewportHeight / this.options.pixelsPerBody);
 		for (let i = 0; i <= totalBodies; i++) {
 			let body = this.createBody(viewportWidth, viewportHeight);
 			this.bodies.push(body);
@@ -86,20 +91,27 @@ let floatingBubbles = {
 	},
 	
 	// random number generator
-	rand(min, max) {
+	randomize(range) {
+		let [min, max] = range;
 		return Math.random() * (max - min) + min;
 	},
 	
 	// create body with some random parameters
 	createBody(viewportWidth, viewportHeight) {
-		let x = this.rand(0, viewportWidth);
-		let y = this.rand(0, viewportHeight);
-		let radius = this.rand(this.options.minBodyRadius, this.options.maxBodyRadius)
+		let x = this.randomize([0, viewportWidth]);
+		let y = this.randomize([0, viewportHeight]);
+		let radius = this.randomize(this.options.radiusRange);
 		let color = this.options.colors[this.bodies.length % this.options.colors.length];
 	
 		return Matter.Bodies.circle(x, y, radius, {
+			render: {
+				fillStyle: color,
+				opacity: this.options.opacity
+			},
 			frictionAir: this.options.airFriction,
-			render: { fillStyle: color },
+			collisionFilter: {
+				group: this.options.collisions ? 1 : -1
+			},
 			plugin: {
 				wrap: {
 					min: { x: 0, y: 0 },
@@ -121,11 +133,10 @@ let floatingBubbles = {
 		this.scrollTimeout = null;
 	
 		let delta = (this.lastScrollTop - document.documentElement.scrollTop) * this.options.scrollVelocity;
-	
 		this.bodies.forEach((body) => {
 			Matter.Body.setVelocity(body, {
-				x: body.velocity.x + delta * this.rand(-0.5, 0.5),
-				y: body.velocity.y + delta * this.rand(0.5, 1.5)
+				x: body.velocity.x + delta * this.randomize(this.options.xVarianceRange),
+				y: body.velocity.y + delta * this.randomize(this.options.yVarianceRange)
 			});
 		});
 	
@@ -146,7 +157,9 @@ let floatingBubbles = {
 	}
 }
 
+// wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
+	// start floating bubbles background
 	Object.create(floatingBubbles).init({
         canvasSelector: '#bg'
     });
