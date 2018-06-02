@@ -3,50 +3,51 @@
 }
 
 body {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    color: #57413b;
-    background-color: #fcf8f2;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 40px 20px;
+	color: #57413b;
+	background-color: #fffcf5;
 	font: 1.25rem/1.5 'Roboto', sans-serif;
 }
 
 .wrapper {
-    padding: 20px;
-    border: 1px solid #fff;
-    background-color: rgba(255, 255, 255, 0.5);
+	padding: 20px;
+	border: 1px solid #fff;
+	background-color: rgba(255, 255, 255, 0.5);
+	overflow: hidden;
 }
 
 h1, h2 {
-    margin: 0;
-    line-height: 1.25;
+	margin: 0;
+	line-height: 1.25;
 }
 
 h1 {
-    padding-bottom: 2rem;
-    border-bottom: 6px dotted;
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    text-shadow: 1px 1px #fcf8f2, 3px 3px currentColor;
+	padding-bottom: 2rem;
+	border-bottom: 6px dotted;
+	font-size: 3.5rem;
+	text-transform: uppercase;
+	text-shadow: 1px 1px #fffcf5, 3px 3px currentColor;
 }
 
 h2 {
-    margin-top: 2rem;
-    font-size: 1.5rem;
+	margin-top: 2rem;
+	font-size: 1.5rem;
 }
 
 canvas {
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    left: 0;
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
 }
 
-@media screen and (min-width: 450px) {
-    h1 {
-        font-size: 5rem;
-    }
-    h2 {
-        font-size: 2rem;
-    }
+@media screen and (min-width: 500px) {
+	h1 {
+		font-size: 5rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
 }
