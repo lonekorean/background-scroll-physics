@@ -1,7 +1,7 @@
 // plugin
 Matter.use('matter-wrap');
 
-let bokeh = {
+let hexBokeh = {
 	// customizable options (passed into init function)
     options: {
 		canvasSelector: '',				// to find <canvas> in DOM to draw on
@@ -103,7 +103,7 @@ let bokeh = {
 		let radius = this.randomize(this.options.radiusRange);
 		let color = this.options.colors[this.bodies.length % this.options.colors.length];
 	
-		return Matter.Bodies.circle(x, y, radius, {
+		return Matter.Bodies.polygon(x, y, 6, radius, {
 			render: {
 				fillStyle: color,
 				opacity: this.options.opacity
@@ -160,13 +160,13 @@ let bokeh = {
 // wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
 	// start floating bubbles background
-	Object.create(bokeh).init({
+	Object.create(hexBokeh).init({
 		canvasSelector: '#bg1',
 		radiusRange: [30, 60],
 		pixelsPerBody: 40000
     });
 
-	Object.create(bokeh).init({
+	Object.create(hexBokeh).init({
 		canvasSelector: '#bg2',
 		radiusRange: [100, 200],
 		pixelsPerBody: 70000
