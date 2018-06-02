@@ -15,7 +15,7 @@ let floatingBubbles = {
 		pixelsPerBody: 50000,			// viewport pixels required for each body added
 
 		// colors to cycle through to fill bodies
-		colors: ['#c5f6fa', '#d0ebff', '#d3f9d8']
+		colors: ['#e4e4cc', '#e1d2c4', '#d1e4df']
 	},
 
 	// throttling intervals (in ms)
