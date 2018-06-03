@@ -23,7 +23,7 @@ let floatingBubbles = {
 	resizeDelay: 400,
 
 	// throttling variables and timeouts
-	lastScrollTop: undefined,
+	lastOffset: undefined,
 	scrollTimeout: undefined,
 	resizeTimeout: undefined,
 
@@ -41,7 +41,7 @@ let floatingBubbles = {
 		let viewportWidth = document.documentElement.clientWidth;
 		let viewportHeight = document.documentElement.clientHeight;
 
-		this.lastScrollTop = document.documentElement.scrollTop;
+		this.lastOffset = window.pageYOffset;
 		this.scrollTimeout = null;
 		this.resizeTimeout = null;
 	
@@ -131,8 +131,8 @@ let floatingBubbles = {
 	// applies velocity to bodies based on scrolling with some randomness
 	onScroll() {
 		this.scrollTimeout = null;
-	
-		let delta = (this.lastScrollTop - document.documentElement.scrollTop) * this.options.scrollVelocity;
+
+		let delta = (this.lastOffset - window.pageYOffset) * this.options.scrollVelocity;
 		this.bodies.forEach((body) => {
 			Matter.Body.setVelocity(body, {
 				x: body.velocity.x + delta * this.randomize(this.options.xVarianceRange),
@@ -140,7 +140,7 @@ let floatingBubbles = {
 			});
 		});
 	
-		this.lastScrollTop = document.documentElement.scrollTop;
+		this.lastOffset = window.pageYOffset;
 	},
 	
 	// enforces throttling of resize handler
