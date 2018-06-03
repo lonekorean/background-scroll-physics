@@ -159,13 +159,14 @@ let hexBokeh = {
 
 // wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
-	// start floating bubbles background
+	// start first hex bokeh background
 	Object.create(hexBokeh).init({
 		canvasSelector: '#bg1',
 		radiusRange: [30, 60],
 		pixelsPerBody: 40000
     });
 
+	// start second hex bokeh background
 	Object.create(hexBokeh).init({
 		canvasSelector: '#bg2',
 		radiusRange: [100, 200],
