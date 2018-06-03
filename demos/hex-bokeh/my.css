@@ -21,6 +21,9 @@ body {
 h1, h2 {
 	margin: 0;
 	color: #bea6ff;
+	background: linear-gradient(to right, #7ef2cf, #bea6ff, #8ccdff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 	line-height: 1.25;
 }
 
