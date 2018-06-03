@@ -14,25 +14,25 @@ body {
 
 .wrapper {
 	padding: 20px;
-	border: 1px solid #000;
 	background-color: rgba(0, 0, 0, 0.75);
 	overflow: hidden;
 }
 
 h1, h2 {
 	margin: 0;
+	color: #bea6ff;
 	line-height: 1.25;
 }
 
 h1 {
 	padding-bottom: 2rem;
-	border-bottom: 6px dotted;
+	border-bottom: 1px solid #fff;
 	font-size: 3.5rem;
 	text-transform: uppercase;
 }
 
 h2 {
-	margin-top: 2rem;
+	margin-top: 2.5rem;
 	font-size: 1.5rem;
 }
 
@@ -44,7 +44,7 @@ canvas {
 
 #bg1 {
 	z-index: -1;
-	filter: blur(2px);
+	filter: blur(1px);
 }
 
 #bg2 {

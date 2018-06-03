@@ -6,7 +6,7 @@ let hexBokeh = {
     options: {
 		canvasSelector: '',				// to find <canvas> in DOM to draw on
 		radiusRange: [50, 100],			// random range of body radii
-		xVarianceRange: [-0.1, 0.1],	// random range of x velocity scaling on bodies
+		xVarianceRange: [0.1, 0.3],		// random range of x velocity scaling on bodies
 		yVarianceRange: [0.5, 1.5],		// random range of y velocity scaling on bodies
 		airFriction: 0.03,				// air friction of bodies
 		opacity: 0.5,					// opacity of bodies
