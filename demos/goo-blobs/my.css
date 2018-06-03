@@ -1,0 +1,77 @@
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 20px;
+	color: #945d50;
+	background-color: #edffff;
+	font: 1.25rem/1.5 'Roboto', sans-serif;
+}
+
+.wrapper {
+	padding: 40px 20px;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	background-color: rgba(255, 255, 255, 0.5);
+	background: repeating-linear-gradient(
+		-45deg,
+		rgba(255, 255, 255, 0.5),
+		rgba(255, 255, 255, 0.5) 20px,
+		rgba(255, 255, 255, 0.65) 20px,
+		rgba(255, 255, 255, 0.65) 40px
+	);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+h1, h2 {
+	margin: 0;
+	line-height: 1.25;
+}
+
+h1 {
+	padding: 0.5rem 0;
+	border-top: 10px solid;
+	font-size: 3.5rem;
+	text-transform: uppercase;
+}
+
+h2 {
+	margin-top: 2.5rem;
+	font-size: 1.5rem;
+	border-left: 10px solid;
+	padding-left: 15px;
+}
+
+svg {
+	display: none;
+}
+
+canvas {
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+
+#bg1 {
+	z-index: -1;
+	filter: url('#goo');
+}
+
+#bg2 {
+	z-index: -2;
+	filter: url('#goo') blur(4px);
+}
+
+@media screen and (min-width: 500px) {
+	h1 {
+		font-size: 5rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
+}
