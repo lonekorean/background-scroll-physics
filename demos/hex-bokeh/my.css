@@ -11,7 +11,7 @@ body {
 }
 
 .wrapper {
-	max-width: 900px;
+	max-width: 800px;
 	margin: 40px auto;
 	padding: 20px;
 	background-color: rgba(0, 0, 0, 0.75);
@@ -28,14 +28,20 @@ h1, h2 {
 }
 
 h1 {
-	padding-bottom: 2rem;
-	border-bottom: 1px solid #fff;
 	font-size: 3rem;
 	text-transform: uppercase;
 }
 
+h1::after {
+	content: '';
+	display: block;
+	height: 2px;
+	margin-top: 20px;
+	background: linear-gradient(to right, #7ef2cf, #bea6ff, #8ccdff);
+}
+
 h2 {
-	margin-top: 2.5rem;
+	margin-top: 40px;
 	font-size: 1.5rem;
 }
 

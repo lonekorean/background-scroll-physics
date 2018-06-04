@@ -4,13 +4,13 @@
 
 body {
 	margin: 0 10%;
-	color: #945d50;
+	color: #915b4e;
 	background-color: #edffff;
 	font: 1.25rem/1.5 'Roboto', sans-serif;
 }
 
 .wrapper {
-	max-width: 900px;
+	max-width: 800px;
 	margin: 0 auto;
 	padding: 40px 20px;
 	border-left: 1px solid #fff;
@@ -33,14 +33,14 @@ h1, h2 {
 }
 
 h1 {
-	padding: 0.5rem 0;
+	padding: 10px 0;
 	border-top: 10px solid;
 	font-size: 3rem;
 	text-transform: uppercase;
 }
 
 h2 {
-	margin-top: 2.5rem;
+	margin-top: 40px;
 	font-size: 1.5rem;
 	border-left: 10px solid;
 	padding-left: 15px;
