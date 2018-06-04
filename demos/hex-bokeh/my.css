@@ -30,7 +30,7 @@ h1, h2 {
 h1 {
 	padding-bottom: 2rem;
 	border-bottom: 1px solid #fff;
-	font-size: 3.5rem;
+	font-size: 3rem;
 	text-transform: uppercase;
 }
 
@@ -57,7 +57,7 @@ canvas {
 
 @media screen and (min-width: 500px) {
 	h1 {
-		font-size: 5rem;
+		font-size: 4rem;
 	}
 	h2 {
 		font-size: 2rem;
