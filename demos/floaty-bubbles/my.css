@@ -3,15 +3,15 @@
 }
 
 body {
-	max-width: 900px;
-	margin: 0 auto;
-	padding: 40px 20px;
+	margin: 0 10%;
 	color: #57413b;
 	background-color: #fffcf5;
 	font: 1.25rem/1.5 'Roboto', sans-serif;
 }
 
 .wrapper {
+	max-width: 900px;
+	margin: 40px auto;
 	padding: 20px;
 	border: 1px solid #fff;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -27,7 +27,7 @@ h1, h2 {
 h1 {
 	padding-bottom: 2rem;
 	border-bottom: 6px dotted;
-	font-size: 3.5rem;
+	font-size: 3rem;
 	text-transform: uppercase;
 	text-shadow: 1px 1px #fffcf5, 3px 3px;
 }
@@ -44,9 +44,9 @@ canvas {
 	left: 0;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 450px) {
 	h1 {
-		font-size: 5rem;
+		font-size: 4rem;
 	}
 	h2 {
 		font-size: 2rem;

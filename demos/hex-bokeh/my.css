@@ -3,9 +3,7 @@
 }
 
 body {
-	max-width: 900px;
-	margin: 0 auto;
-	padding: 40px 20px;
+	margin: 0 10%;
 	color: #fff;
 	background-color: #000;
 	background: linear-gradient(to bottom right, #142621, #262133, #1c2933);
@@ -13,6 +11,8 @@ body {
 }
 
 .wrapper {
+	max-width: 900px;
+	margin: 40px auto;
 	padding: 20px;
 	background-color: rgba(0, 0, 0, 0.75);
 	overflow: hidden;

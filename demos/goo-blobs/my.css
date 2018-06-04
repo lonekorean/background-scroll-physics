@@ -3,15 +3,15 @@
 }
 
 body {
-	max-width: 900px;
-	margin: 0 auto;
-	padding: 0 20px;
+	margin: 0 10%;
 	color: #945d50;
 	background-color: #edffff;
 	font: 1.25rem/1.5 'Roboto', sans-serif;
 }
 
 .wrapper {
+	max-width: 900px;
+	margin: 0 auto;
 	padding: 40px 20px;
 	border-left: 1px solid #fff;
 	border-right: 1px solid #fff;

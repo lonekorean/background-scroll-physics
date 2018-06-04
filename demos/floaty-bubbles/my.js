@@ -1,7 +1,7 @@
 // plugin
 Matter.use('matter-wrap');
 
-let floatingBubbles = {
+let floatyBubbles = {
 	// customizable options (passed into init function)
     options: {
 		canvasSelector: '',				// to find <canvas> in DOM to draw on
@@ -159,8 +159,8 @@ let floatingBubbles = {
 
 // wait for DOM to load
 window.addEventListener('DOMContentLoaded', () => {
-	// start floating bubbles background
-	Object.create(floatingBubbles).init({
+	// start floaty bubbles background
+	Object.create(floatyBubbles).init({
         canvasSelector: '#bg'
     });
 });
