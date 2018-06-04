@@ -7,15 +7,15 @@ let gooBlobs = {
 		canvasSelector: '',				// to find <canvas> in DOM to draw on
 		radiusRange: [75, 150],			// random range of body radii
 		xVarianceRange: [-1, 1],		// random range of x velocity scaling on bodies
-		yVarianceRange: [-1, 1],		// random range of y velocity scaling on bodies
-		airFriction: 0.03,				// air friction of bodies
+		yVarianceRange: [0.5, 1.5],		// random range of y velocity scaling on bodies
+		airFriction: 0.04,				// air friction of bodies
 		opacity: 1,						// opacity of bodies
 		collisions: false,				// do bodies collide or pass through
 		scrollVelocity: 0.015,			// scaling of scroll delta to velocity applied to bodies
-		pixelsPerBody: 40000,			// viewport pixels required for each body added
+		pixelsPerBody: 50000,			// viewport pixels required for each body added
 
 		// colors to cycle through to fill bodies
-		colors: ['#74b816']
+		colors: ['#bad4cf']
 	},
 
 	// throttling intervals (in ms)
@@ -161,10 +161,7 @@ let gooBlobs = {
 window.addEventListener('DOMContentLoaded', () => {
 	// start first goo blobs background
 	Object.create(gooBlobs).init({
-		canvasSelector: '#bg1',
-		yVarianceRange: [0.5, 1.5],
-		pixelsPerBody: 50000,
-		colors: ['#bad4cf']
+		canvasSelector: '#bg1'
 	});
 	
 	// start second goo blobs background

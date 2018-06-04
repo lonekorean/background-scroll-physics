@@ -5,14 +5,14 @@ let hexBokeh = {
 	// customizable options (passed into init function)
     options: {
 		canvasSelector: '',				// to find <canvas> in DOM to draw on
-		radiusRange: [50, 100],			// random range of body radii
+		radiusRange: [30, 60],			// random range of body radii
 		xVarianceRange: [0.1, 0.3],		// random range of x velocity scaling on bodies
 		yVarianceRange: [0.5, 1.5],		// random range of y velocity scaling on bodies
 		airFriction: 0.03,				// air friction of bodies
 		opacity: 0.5,					// opacity of bodies
 		collisions: false,				// do bodies collide or pass through
 		scrollVelocity: 0.025,			// scaling of scroll delta to velocity applied to bodies
-		pixelsPerBody: 50000,			// viewport pixels required for each body added
+		pixelsPerBody: 40000,			// viewport pixels required for each body added
 
 		// colors to cycle through to fill bodies
 		colors: ['#7ef2cf', '#bea6ff', '#8ccdff']
@@ -161,9 +161,7 @@ let hexBokeh = {
 window.addEventListener('DOMContentLoaded', () => {
 	// start first hex bokeh background
 	Object.create(hexBokeh).init({
-		canvasSelector: '#bg1',
-		radiusRange: [30, 60],
-		pixelsPerBody: 40000
+		canvasSelector: '#bg1'
     });
 
 	// start second hex bokeh background
