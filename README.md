@@ -1,3 +1,3 @@
-# page-background-physics
+# background-scroll-physics
 
-Physics-based visual effects for page backgrounds.
+Nifty physics-based background scroll effects for your web pages.
